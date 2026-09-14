@@ -60,6 +60,7 @@
         player.setBounce(0.1);
         player.setCollideWorldBounds(true);
         
+        
 
         
 
@@ -91,6 +92,10 @@
             setXY: { x: 12, y: 0, stepX: 70}
         });
 
+        stars.children.iterate(function(child) {
+            child.setCollideWorldBounds(true);
+        });
+
         this.physics.add.collider(stars, platforms);
         this.physics.add.overlap(player, stars, collectStar, null, this);
 
@@ -102,6 +107,8 @@
         {
             star.disableBody(true, true);
         }
+
+        
 
         
 
@@ -134,13 +141,19 @@
             player.setVelocityY(-475);
         }
 
+    
         stars.children.iterate(function(child) {
             if (child.body.touching.down) {
-            child.setVelocityY(-500);
-            
+                child.setVelocityY(-500)
+                if (Math.random() < 0.5) {
+                child.setVelocityX(200)
+            } else {
+                child.setVelocityX(-200)
             }
+        }
         });
-    }
+    
+}
 </script>
 
 </body>
