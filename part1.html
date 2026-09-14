@@ -133,8 +133,14 @@
         {
             player.setVelocityY(-475);
         }
-    }
 
+        stars.children.iterate(function(child) {
+            if (child.body.touching.down) {
+            child.setVelocityY(-500);
+            
+            }
+        });
+    }
 </script>
 
 </body>
