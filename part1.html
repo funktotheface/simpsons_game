@@ -14,6 +14,9 @@
 
 <script type="text/javascript">
 
+    var score = 0
+    var scoreText;
+
     var config = {
         type: Phaser.AUTO,
         width: 800,
@@ -103,10 +106,17 @@
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         })
 
+        scoreText = this.add.text(16, -150, 'score: 0', { fontSize: '32px', fill: '#000'});
+
         function collectStar (player, star)
         {
             star.disableBody(true, true);
+
+            score += 10
+            scoreText.setText('score: ' + score)
         }
+
+        
 
         
 
