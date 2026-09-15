@@ -43,10 +43,13 @@
         this.load.image('ground', 'assets/platform.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
-        this.load.spritesheet('dude', 
-            'assets/dude.png',
-            { frameWidth: 32, frameHeight: 48 }
-    );
+        this.load.atlas(
+            'homer',
+            'assets/homer_sprite_sheet.png',
+            'assets/homer_sprite_sheet.json'
+        );
+    
+
     }
 
     function create ()
@@ -58,34 +61,35 @@
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
 
-        player = this.physics.add.sprite(100, 450, 'dude');
+        player = this.physics.add.sprite(100, 450, 'homer', 'walk-1');
         this.physics.add.collider(player, platforms);
         player.setBounce(0.1);
         player.setCollideWorldBounds(true);
+
+        this.anims.create({
+            key: 'walk-right',
+        
+            frames: [
+                { key: 'homer', frame: 'walk-1'},
+                { key: 'homer', frame: 'walk-2'},
+                { key: 'homer', frame: 'walk-3'},
+                { key: 'homer', frame: 'walk-4'},
+                { key: 'homer', frame: 'walk-5'},
+                { key: 'homer', frame: 'walk-6'},
+                { key: 'homer', frame: 'walk-7'},
+                { key: 'homer', frame: 'walk-8'},
+                
+            ],
+            
+        framRate: 10,
+        repeat: -1
+        });
         
         
 
         
 
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3}),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
-            frameRate: 20,
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8}),
-            frameRate: 10,
-            repeat: -1
-        });
+        
 
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -100,7 +104,7 @@
         });
 
         this.physics.add.collider(stars, platforms);
-        this.physics.add.overlap(player, stars, collectStar, null, this);
+        {{/*  this.physics.add.overlap(player, stars, collectStar, null, this);  */}}
 
         stars.children.iterate(function (child) {
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
@@ -129,39 +133,23 @@
 
     function update ()
     {
-        if (cursors.left.isDown)
-        {
-            player.setVelocityX(-160);
-            player.anims.play('left', true);
-        }
 
-        else if (cursors.right.isDown)
+        if (cursors.right.isDown)
         {
             player.setVelocityX(160);
-            player.anims.play('right', true);
+            player.setFlipX(false).anims.play('walk-right', true);
         }
-        else
+
+        else if (cursors.left.isDown)
         {
+            player.setVelocityX(-160);
+            player.setFlipX(true).anims.play('walk-right', true)}
+        else{
             player.setVelocityX(0);
-            player.anims.play('turn');
+            player.anims.stop();
+            player.setFrame('walk-1');
         }
-
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.setVelocityY(-475);
-        }
-
-    
-        stars.children.iterate(function(child) {
-            if (child.body.touching.down) {
-                child.setVelocityY(-500)
-                if (Math.random() < 0.5) {
-                child.setVelocityX(200)
-            } else {
-                child.setVelocityX(-200)
-            }
-        }
-        });
+        
     
 }
 </script>
