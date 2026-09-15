@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8" />
     <title>Making your first Phaser 3 Game - Part 1</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -45,6 +45,7 @@
 
     var game = new Phaser.Game(config);
 
+
     function preload ()
     {
         this.load.image('sky', 'assets/sky.png');
@@ -70,9 +71,22 @@
         platforms.create(750, 220, 'ground');
 
         player = this.physics.add.sprite(100, 450, 'homer', 'walk-1');
+        
         this.physics.add.collider(player, platforms);
         player.setBounce(0.1);
         player.setCollideWorldBounds(true);
+
+        player.preFX.setPadding(16);
+
+        var homerShadow = player.preFX.addShadow(
+            4,
+            4,
+            0.1,
+            1,
+            0x000000,
+            6,
+            0.3
+        );
 
         this.anims.create({
             key: 'walk-right',
@@ -89,7 +103,7 @@
                 
             ],
             
-        framRate: 10,
+        frameRate: 10,
         repeat: -1
         });
         
