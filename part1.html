@@ -103,6 +103,8 @@
             child.setCollideWorldBounds(true);
         });
 
+        
+
         this.physics.add.collider(stars, platforms);
         this.physics.add.overlap(player, stars, collectStar, null, this);
 
@@ -110,6 +112,7 @@
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         })
 
+        
         scoreText = this.add.text(16, -150, 'score: 0', { fontSize: '32px', fill: '#000'});
 
         function collectStar (player, star)
@@ -149,6 +152,21 @@
             player.anims.stop();
             player.setFrame('walk-1');
         }
+        
+        stars.children.iterate(function(child) {
+            if (child.body.touching.down){
+                child.setVelocityY(-600)
+
+                if (Math.random()  > 0.5) {
+                child.setVelocityX(250)}
+                else {
+                child.setVelocityX(-250)
+            }
+        }
+            
+        })
+        
+        
         
     
 }
