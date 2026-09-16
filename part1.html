@@ -175,7 +175,7 @@
             player.setFrame('walk-1');
         }
 
-        if (cursors.up.isDown && player.body.touching.down) {
+        if (cursors.up.isDown && player.body.blocked.down) {
             player.setVelocityY(-300)
         }
         
