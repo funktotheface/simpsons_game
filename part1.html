@@ -137,6 +137,11 @@
         repeat: -1
         });
         
+        var delay = Phaser.Math.Between(2000, 6000)
+
+        this.time.delayedCall(delay, function() {
+            console.log('idle timer fired!')
+            })
 
         
 
