@@ -223,8 +223,7 @@
 
             if (
             player.body.blocked.down &&
-            player.anims.currentAnim &&
-            player.anims.currentAnim.key === 'jumping') {
+            player.anims.currentAnim?.key !== 'stand-idle') {
                 player.anims.stop()
                 player.setFrame('idle-1')}
 
