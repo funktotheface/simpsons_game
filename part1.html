@@ -174,6 +174,11 @@
             player.anims.stop();
             player.setFrame('walk-1');
         }
+
+        if (cursors.up.isDown && player.body.touching.down) {
+            player.setVelocityY(-300)
+        }
+        
         
         stars.children.iterate(function(child) {
             if (child.body.touching.down){
