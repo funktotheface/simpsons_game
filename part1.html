@@ -221,6 +221,13 @@
         else{
             player.setVelocityX(0);
 
+            if (
+            player.body.blocked.down &&
+            player.anims.currentAnim &&
+            player.anims.currentAnim.key === 'jumping') {
+                player.anims.stop()
+                player.setFrame('idle-1')}
+
             
         }
 
