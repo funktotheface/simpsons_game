@@ -87,6 +87,14 @@
             "trimmed": false,
             "spriteSourceSize": { "x": 0, "y": 0, "w": 36, "h": 63 },
             "sourceSize": { "w": 36, "h": 63 }
+        },
+
+        "jump": {
+            "frame": { "x": 10, "y": 318, "w": 54, "h": 62 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 54, "h": 62 },
+            "sourceSize": { "w": 54, "h": 62 }
         }
     },
     "meta": {

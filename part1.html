@@ -122,6 +122,17 @@
         frameRate: 10,
         repeat: -1
         });
+
+        this.anims.create({
+            key: 'jumping',
+        
+            frames: [
+                { key: 'homer', frame: 'jump'},
+            ],
+            
+        frameRate: 10,
+        repeat: -1
+        });
         
 
         
@@ -177,13 +188,22 @@
         if (cursors.right.isDown)
         {
             player.setVelocityX(160);
-            player.setFlipX(false).anims.play('walk-right', true);
+            player.setFlipX(false)
+
+            if (player.body.blocked.down) {
+            player.anims.play('walk-right', true)
+            }
         }
 
         else if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
-            player.setFlipX(true).anims.play('walk-right', true)}
+            player.setFlipX(true)
+
+            if (player.body.blocked.down) {
+                player.anims.play('walk-right', true)
+                }
+            }
         else{
             player.setVelocityX(0);
 
@@ -194,6 +214,7 @@
 
         if (cursors.up.isDown && player.body.blocked.down) {
             player.setVelocityY(-300)
+            player.anims.play('jumping', true)
         }
 
         
