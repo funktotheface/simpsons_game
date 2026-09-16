@@ -186,13 +186,17 @@
             player.setFlipX(true).anims.play('walk-right', true)}
         else{
             player.setVelocityX(0);
-            player.anims.stop();
-            player.setFrame('walk-1');
+
+            if (player.body.blocked.down) {
+                player.anims.play('stand-idle', true)}
+            
         }
 
         if (cursors.up.isDown && player.body.blocked.down) {
             player.setVelocityY(-300)
         }
+
+        
         
         
         stars.children.iterate(function(child) {
