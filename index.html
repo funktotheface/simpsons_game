@@ -216,12 +216,23 @@
     function update ()
     {
 
+        const isPunching = 
+            player.anims.currentAnim?.key === 'punch' &&
+            player.anims.isPlaying
+
+            const isIdling = 
+            player.anims.currentAnim?.key ===  'stand-idle' &&
+            player.anims.isPlaying
+
+            
+
         if (cursors.right.isDown)
         {
             player.setVelocityX(160);
             player.setFlipX(false)
 
-            if (player.body.blocked.down) {
+            if (player.body.blocked.down &&
+            ! isPunching) {
             player.anims.play('walk-right', true)
             }
         }
@@ -231,25 +242,19 @@
             player.setVelocityX(-160);
             player.setFlipX(true)
 
-            if (player.body.blocked.down) {
+            if (player.body.blocked.down &&
+                ! isPunching) {
                 player.anims.play('walk-right', true)
                 }
             }
         else{
             player.setVelocityX(0)
 
-            const isPunching = 
-            player.anims.currentAnim?.key === 'punch' &&
-            player.anims.isPlaying
-
-            const isIdling = 
-            player.anims.currentAnim?.key ===  'stand-idle' &&
-            player.anims.isPlaying
 
             if (isPunching ||  isIdling) {
             }
 
-            else {
+            else if (player.body.blocked.down) {
             player.anims.stop()
             player.setFrame('idle-1')}
         }
