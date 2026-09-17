@@ -150,7 +150,7 @@
             ],
             
         frameRate: 10,
-        repeat: 1
+        repeat: 0
         });
         
         function scheduleIdle()
@@ -236,23 +236,33 @@
                 }
             }
         else{
-            player.setVelocityX(0);
+            player.setVelocityX(0)
 
-            if (
-            player.body.blocked.down &&
-            player.anims.currentAnim?.key !== 'stand-idle') {
-                player.anims.stop()
-                player.setFrame('idle-1')}
+            const isPunching = 
+            player.anims.currentAnim?.key === 'punch' &&
+            player.anims.isPlaying
+
+            const isIdling = 
+            player.anims.currentAnim?.key ===  'stand-idle' &&
+            player.anims.isPlaying
+
+            if (isPunching ||  isIdling) {
+            }
+
+            else {
+            player.anims.stop()
+            player.setFrame('idle-1')}
+        }
 
             
-        }
+        
 
         if (cursors.up.isDown && player.body.blocked.down) {
             player.setVelocityY(-300)
             player.anims.play('jumping', true)
         }
 
-        if (attackKey.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(attackKey)) {
         player.anims.play('punch', true)
         }
 
