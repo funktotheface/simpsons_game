@@ -136,6 +136,22 @@
         frameRate: 10,
         repeat: -1
         });
+
+        this.anims.create({
+            key: 'punch',
+        
+            frames: [
+                { key: 'homer', frame: 'punch-1'},
+                { key: 'homer', frame: 'punch-2'},
+                { key: 'homer', frame: 'punch-3'},
+                { key: 'homer', frame: 'punch-4'},
+                { key: 'homer', frame: 'punch-5'},
+                { key: 'homer', frame: 'punch-6'},
+            ],
+            
+        frameRate: 10,
+        repeat: 1
+        });
         
         function scheduleIdle()
         {
@@ -154,6 +170,7 @@
         
 
         cursors = this.input.keyboard.createCursorKeys();
+        attackKey = this.input.keyboard.addKey("Z")
 
         stars = this.physics.add.group({
             key: 'star',
@@ -233,6 +250,10 @@
         if (cursors.up.isDown && player.body.blocked.down) {
             player.setVelocityY(-300)
             player.anims.play('jumping', true)
+        }
+
+        if (attackKey.isDown) {
+        player.anims.play('punch', true)
         }
 
         
