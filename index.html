@@ -157,8 +157,15 @@
         {
             var delay = Phaser.Math.Between(2000, 6000)
 
+
             this.time.delayedCall(delay, function() {
-                if (player.body.blocked.down && player.body.velocity.x === 0) {
+                const isPunching = 
+                    player.anims.currentAnim?.key === 'punch' &&
+                    player.anims.isPlaying 
+
+                if (player.body.blocked.down && 
+                    player.body.velocity.x === 0 &&
+                    !isPunching) {
                     player.anims.play('stand-idle')
                 } 
             scheduleIdle.call(this)
@@ -224,7 +231,9 @@
             player.anims.currentAnim?.key ===  'stand-idle' &&
             player.anims.isPlaying
 
-            
+            const isJumping = 
+                player.anims.currentAnim?.key === 'jumping' &&
+                player.anims.isPlaying
 
         if (cursors.right.isDown)
         {
